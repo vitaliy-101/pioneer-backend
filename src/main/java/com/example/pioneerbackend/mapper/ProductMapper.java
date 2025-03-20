@@ -13,6 +13,8 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
+import static com.example.pioneerbackend.util.JsonUtils.convertFromString;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ProductMapper {
 
@@ -46,7 +48,7 @@ public interface ProductMapper {
     default List<String> convertAdditionalToStringList(List<AdditionalCharacteristic> additionalCharacteristics) {
         if (additionalCharacteristics == null) return null;
         return additionalCharacteristics.stream()
-                .map(JsonUtils::convertFromAdditionalCharacteristicToString)
+                .map(JsonUtils::convertToString)
                 .toList();
     }
 
@@ -55,7 +57,7 @@ public interface ProductMapper {
     default List<AdditionalCharacteristic> convertStringListToAdditionalCharacteristics(List<String> additionalList) {
         if (additionalList == null) return null;
         return additionalList.stream()
-                .map(JsonUtils::convertFromStringToAdditionalCharacteristic)
+                .map(element -> convertFromString(element, AdditionalCharacteristic.class))
                 .toList();
     }
 }

@@ -2,7 +2,7 @@ package com.example.pioneerbackend.specification.strategy;
 
 import com.example.pioneerbackend.specification.FilterUnit;
 
-import static com.example.pioneerbackend.util.FilterUtils.convertTypeValue;
+import static com.example.pioneerbackend.util.FilterUtils.*;
 
 public class FilterSingleBehaviour implements FilterBehaviour {
 
@@ -16,11 +16,6 @@ public class FilterSingleBehaviour implements FilterBehaviour {
                     filterUnit.getCriteriaBuilder().equal(filterUnit.getRoot().get(key), value)
             );
         }
-    }
-
-    private boolean verify(FilterUnit filterUnit) {
-        var values = filterUnit.getFilter().getValues();
-        return values != null && !values.isEmpty() && !values.getFirst().equalsIgnoreCase("все");
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.pioneerbackend.mapper.custom;
 
 import com.example.pioneerbackend.dto.ProductAllResponse;
+import com.example.pioneerbackend.dto.docs.DocProductInfo;
 import com.example.pioneerbackend.dto.product.MeasuringRanges;
 import com.example.pioneerbackend.dto.product.ProductCreationRequest;
 import com.example.pioneerbackend.dto.product.ProductCreationResponse;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.example.pioneerbackend.util.ProductUtils.*;
@@ -37,9 +39,12 @@ public class CustomProductMapper {
         return response;
     }
 
-    public ProductFullResponse fromEntityToProductFullResponse(Product product, Basket basket) {
+    public ProductFullResponse fromEntityToProductFullResponse(Product product,
+                                                               List<DocProductInfo> docProductInfos,
+                                                               Basket basket) {
         var productFullResponse = productMapper.fromCreationResponseToFullResponse(fromEntityToCreationResponse(product), extractBasketCount(basket));
         productFullResponse.setImagesUrl(extractImages(product));
+        productFullResponse.setDocProductInfos(docProductInfos);
         return productFullResponse;
     }
 

@@ -8,19 +8,19 @@ import lombok.experimental.UtilityClass;
 public class JsonUtils {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String convertFromAdditionalCharacteristicToString(AdditionalCharacteristic characteristic) {
+    public static <T> String convertToString(T object) {
         try {
-            return objectMapper.writeValueAsString(characteristic);
+            return objectMapper.writeValueAsString(object);
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при конвертации характеристик в JSON", e); //todo
+            throw new RuntimeException("Ошибка при конвертации объекта в JSON", e);
         }
     }
 
-    public static AdditionalCharacteristic convertFromStringToAdditionalCharacteristic(String characteristic) {
+    public static <T> T convertFromString(String json, Class<T> clazz) {
         try {
-            return objectMapper.readValue(characteristic, AdditionalCharacteristic.class);
+            return objectMapper.readValue(json, clazz);
         } catch (Exception e) {
-            throw new RuntimeException("Ошибка при конвертации характеристик в AdditionalCharacteristic", e); //todo
+            throw new RuntimeException("Ошибка при конвертации JSON в объект " + clazz.getSimpleName(), e);
         }
     }
 }

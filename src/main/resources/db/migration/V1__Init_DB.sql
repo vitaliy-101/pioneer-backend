@@ -80,3 +80,29 @@ create table if not exists basket
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
 );
+
+create table if not exists manufacturer
+(
+    name  VARCHAR,
+    image bytea,
+    CONSTRAINT pk_manufacturer primary key (name)
+);
+
+create table if not exists docs
+(
+    id         BIGSERIAL,
+    name       VARCHAR,
+    data       bytea,
+    type       VARCHAR,
+    product_id BIGINT,
+    CONSTRAINT pk_docs primary key (id),
+    CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
+);
+
+
+create table if not exists filter
+(
+    id   BIGSERIAL,
+    data TEXT[],
+    CONSTRAINT pk_filter primary key (id)
+);

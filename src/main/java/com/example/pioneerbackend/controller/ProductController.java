@@ -4,10 +4,11 @@ import com.example.pioneerbackend.dto.ProductAllResponse;
 import com.example.pioneerbackend.dto.product.ProductCreationRequest;
 import com.example.pioneerbackend.dto.product.ProductCreationResponse;
 import com.example.pioneerbackend.dto.product.ProductFullResponse;
-import com.example.pioneerbackend.dto.product.filter.ProductFilter;
+import com.example.pioneerbackend.dto.filter.ProductFilter;
 import com.example.pioneerbackend.entity.user.User;
 import com.example.pioneerbackend.mapper.custom.CustomProductMapper;
 import com.example.pioneerbackend.service.basket.BasketService;
+import com.example.pioneerbackend.service.docs.DocsService;
 import com.example.pioneerbackend.service.product.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ import static com.example.pioneerbackend.util.UserUuidUtils.silenceIds;
 public class ProductController {
     private final ProductService productService;
     private final BasketService basketService;
+    private final DocsService docsService;
     private final CustomProductMapper productMapper;
 
     @Operation(description = "Создать новый товар")
@@ -51,6 +53,7 @@ public class ProductController {
                                                @RequestHeader(value = "Guest-UUID", required = false) String uuid) {
         return productMapper.fromEntityToProductFullResponse(
                 productService.findProductById(id),
+                docsService.findDocsByProductId(id),
                 basketService.findBasketByProductId(id, silenceIds(user, uuid))
         );
     }
@@ -66,7 +69,6 @@ public class ProductController {
         return productMapper.fromPageProductToResponse(
                 products, mapBasketsToMapProductCounts(baskets));
     }
-
 
 
 }

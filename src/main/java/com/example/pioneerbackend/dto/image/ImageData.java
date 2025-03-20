@@ -1,4 +1,4 @@
-package com.example.pioneerbackend.dto.product;
+package com.example.pioneerbackend.dto.image;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.core.io.InputStreamResource;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ProductImageData {
+public class ImageData {
     private InputStreamResource resource;
     private String contentType;
 }

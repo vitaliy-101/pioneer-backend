@@ -17,7 +17,7 @@ public class ProductUtils {
     public static List<String> extractImages(Product product) {
         return product.getImages().stream()
                 .sorted(Comparator.comparing(ProductImage::isMain).reversed())
-                .map(productImage -> convertFileToUrl(PRODUCT_IMAGE_URL, productImage.getId()))
+                .map(productImage -> convertFileToUrl(PRODUCT_IMAGE_URL, productImage.getId().toString()))
                 .collect(Collectors.toList());
     }
 

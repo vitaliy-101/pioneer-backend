@@ -3,6 +3,7 @@ package com.example.pioneerbackend.specification.strategy;
 import com.example.pioneerbackend.specification.FilterUnit;
 
 import static com.example.pioneerbackend.util.FilterUtils.convertTypeValue;
+import static com.example.pioneerbackend.util.FilterUtils.verify;
 
 public class FilterMultiBehaviour implements FilterBehaviour {
     @Override
@@ -16,8 +17,4 @@ public class FilterMultiBehaviour implements FilterBehaviour {
         }
     }
 
-    private boolean verify(FilterUnit filterUnit) {
-        var values = filterUnit.getFilter().getValues();
-        return values != null && !values.isEmpty();
-    }
 }

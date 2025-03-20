@@ -1,6 +1,7 @@
 package com.example.pioneerbackend.entity.product;
 
 import com.example.pioneerbackend.entity.basket.Basket;
+import com.example.pioneerbackend.entity.docs.Docs;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -119,8 +120,11 @@ public class Product {
     private Integer sales = 0;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ProductImage> images;
+    private List<ProductImage> images;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private Set<Basket> baskets;
+    private List<Basket> baskets;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Docs> docs;
 }

@@ -43,13 +43,11 @@ public class BasketController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBasketProduct(@AuthenticationPrincipal User user,
+    public void deleteBasket(@AuthenticationPrincipal User user,
                                     @RequestHeader(value = "Guest-UUID", required = false) String uuid,
                                     @PathVariable("id") Long productId) {
         service.deleteById(productId, silenceIds(user, uuid));
     }
-
-
 
 
 }

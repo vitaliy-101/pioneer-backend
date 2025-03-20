@@ -11,6 +11,7 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
+import static com.example.pioneerbackend.constant.Urls.MANUFACTURER_IMAGE_URL;
 import static com.example.pioneerbackend.constant.Urls.PRODUCT_IMAGE_URL;
 import static com.example.pioneerbackend.util.FileUtils.convertFileToUrl;
 
@@ -30,6 +31,6 @@ public interface BasketMapper {
 
     @Named("convertImageToUrl")
     default String convertImageToUrl(Long imageId) {
-        return convertFileToUrl(PRODUCT_IMAGE_URL, imageId);
+        return convertFileToUrl(MANUFACTURER_IMAGE_URL, imageId.toString());
     }
 }

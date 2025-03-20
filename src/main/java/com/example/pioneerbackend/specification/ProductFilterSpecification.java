@@ -1,7 +1,7 @@
 package com.example.pioneerbackend.specification;
 
-import com.example.pioneerbackend.dto.product.filter.Filter;
-import com.example.pioneerbackend.dto.product.filter.ProductFilter;
+import com.example.pioneerbackend.dto.filter.Filter;
+import com.example.pioneerbackend.dto.filter.ProductFilter;
 import com.example.pioneerbackend.entity.product.Product;
 import com.example.pioneerbackend.specification.strategy.*;
 import jakarta.persistence.criteria.CriteriaBuilder;

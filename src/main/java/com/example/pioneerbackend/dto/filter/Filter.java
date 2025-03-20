@@ -1,4 +1,4 @@
-package com.example.pioneerbackend.dto.product.filter;
+package com.example.pioneerbackend.dto.filter;
 
 import lombok.Getter;
 import lombok.Setter;

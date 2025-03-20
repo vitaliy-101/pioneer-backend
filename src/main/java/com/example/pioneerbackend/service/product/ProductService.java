@@ -1,6 +1,6 @@
 package com.example.pioneerbackend.service.product;
 
-import com.example.pioneerbackend.dto.product.filter.ProductFilter;
+import com.example.pioneerbackend.dto.filter.ProductFilter;
 import com.example.pioneerbackend.entity.product.Product;
 import com.example.pioneerbackend.exceptions.NotFoundByIdException;
 import com.example.pioneerbackend.repository.ProductRepository;

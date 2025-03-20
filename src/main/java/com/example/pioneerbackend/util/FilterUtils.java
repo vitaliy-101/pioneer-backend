@@ -1,5 +1,6 @@
 package com.example.pioneerbackend.util;
 
+import com.example.pioneerbackend.specification.FilterUnit;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
@@ -28,6 +29,11 @@ public class FilterUtils {
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid value for type " + type + ": " + value, e);
         }
+    }
+
+    public static boolean verify(FilterUnit filterUnit) {
+        var values = filterUnit.getFilter().getValues();
+        return values != null && !values.isEmpty();
     }
 
 
