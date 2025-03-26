@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(
                         req -> req.requestMatchers("/login/**", "/register/**", "/refresh_token/**", "/swagger-ui/**",
-                                        "/swagger-resources/*", "/v3/api-docs/**", "/api/v1/**")
+                                        "/swagger-resources/*", "/v3/api-docs/**", "/api/v1/**", "/**")
                                 .permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .anyRequest()
@@ -87,9 +87,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5173/", "http://localhost:5173")); // Замените на ваш адрес
+        configuration.setAllowedOrigins(List.of("*")); // Замените на ваш адрес
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
