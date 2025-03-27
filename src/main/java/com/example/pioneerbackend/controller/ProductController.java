@@ -46,6 +46,13 @@ public class ProductController {
         );
     }
 
+    @Operation(description = "Создать новый товар")
+    @PutMapping("/{id}")
+    public ProductCreationResponse update(@RequestBody ProductCreationRequest request,
+                                          @PathVariable("id") Long id) {
+        return productMapper.fromEntityToCreationResponse(productService.update(id, request));
+    }
+
     @Operation(description = "Получить товар по id")
     @GetMapping("/{id}")
     public ProductFullResponse findProductById(@PathVariable("id") Long id,

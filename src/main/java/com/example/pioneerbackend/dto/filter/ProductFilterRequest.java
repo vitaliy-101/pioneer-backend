@@ -9,10 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 public class ProductFilterRequest {
-    @Schema(description = "Тип прибора, по дефолту - все", example = "cтационарный")
+    @Schema(description = "Тип прибора", example = "cтационарный")
     private String type;
 
-    @Schema(description = "Тип каналов по дефолту - все", example = "одноканальный")
+    @Schema(description = "Тип каналов", example = "одноканальный")
     private String channelType;
 
     @Schema(description = "Тип измеряемых газов")

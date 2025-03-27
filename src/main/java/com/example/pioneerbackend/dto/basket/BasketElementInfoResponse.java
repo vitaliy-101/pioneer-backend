@@ -17,6 +17,8 @@ public class BasketElementInfoResponse {
     private Integer count;
     @Schema(description = "Цена товара")
     private Double price;
+    @Schema(description = "Стоимость всех экземпляров товара")
+    private Double total;
     @Schema(description = "Краткое название товара")
     private String title;
     @Schema(description = "Аватарка товара")

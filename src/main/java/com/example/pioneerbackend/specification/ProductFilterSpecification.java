@@ -20,7 +20,8 @@ public class ProductFilterSpecification {
             "single", new FilterSingleBehaviour(),
             "multi", new FilterMultiBehaviour(),
             "more", new FilterMoreBehaviour(),
-            "less", new FilterLessBehaviour()
+            "less", new FilterLessBehaviour(),
+            "search", new FilterSearchBehaviour()
     );
 
     public Specification<Product> filterByCriteria(ProductFilter request) {

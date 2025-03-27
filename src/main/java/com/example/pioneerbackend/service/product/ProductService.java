@@ -1,14 +1,18 @@
 package com.example.pioneerbackend.service.product;
 
 import com.example.pioneerbackend.dto.filter.ProductFilter;
+import com.example.pioneerbackend.dto.product.ProductCreationRequest;
 import com.example.pioneerbackend.entity.product.Product;
 import com.example.pioneerbackend.exceptions.NotFoundByIdException;
+import com.example.pioneerbackend.mapper.custom.CustomProductMapper;
 import com.example.pioneerbackend.repository.ProductRepository;
 import com.example.pioneerbackend.specification.ProductFilterSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -19,6 +23,7 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductImageService imageService;
     private final ProductFilterSpecification specification;
+    private final CustomProductMapper mapper;
 
     public Product createProduct(Product product, List<MultipartFile> images) {
         var savedProduct = repository.save(product);
@@ -26,6 +31,21 @@ public class ProductService {
             product.setImages(imageService.saveImages(images, savedProduct));
         }
         return savedProduct;
+    }
+
+    private void existsById(Long id) {
+        if (!repository.existsById(id)) {
+            throw new NotFoundByIdException(Product.class, id);
+        }
+    }
+
+    @Transactional
+    @Modifying
+    public Product update(Long id, ProductCreationRequest request) {
+        existsById(id);
+        var product = mapper.fromCreationRequestToEntity(request);
+        product.setId(id);
+        return repository.save(product);
     }
 
     public Product findProductById(Long id) {
