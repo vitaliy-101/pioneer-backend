@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class ManufacturerInfo {
     private String name;
+    private String country;
     private String imageUrl;
 }

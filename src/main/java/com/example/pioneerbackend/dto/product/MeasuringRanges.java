@@ -4,18 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class MeasuringRanges {
-    @Schema(description = "Горючие газы")
-    private String combustibleGases;
-
-    @Schema(description = "Кислород")
-    private String oxygen;
-
-    @Schema(description = "Угарный газ")
-    private String carbonMonoxide;
-
-    @Schema(description = "Сероводород")
-    private String hydrogenSulphide;
+    @Schema(description = "Параметры ключ-значение")
+    private List<AdditionalCharacteristic> params;
 }

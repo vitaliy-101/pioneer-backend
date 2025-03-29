@@ -40,7 +40,7 @@ public class ProductController {
                                                  List<MultipartFile> images) {
         return productMapper.fromEntityToCreationResponse(
                 productService.createProduct(
-                        productMapper.fromCreationRequestToEntity(request),
+                        request,
                         images
                 )
         );

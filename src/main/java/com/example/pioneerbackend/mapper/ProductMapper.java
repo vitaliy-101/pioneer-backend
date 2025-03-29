@@ -25,8 +25,10 @@ public interface ProductMapper {
     @Mapping(target = "additionalCharacteristics", source = "additional", qualifiedByName = "convertStringListToAdditionalCharacteristics")
     ProductCharacteristics fromEntityToProductCharacteristics(Product product);
 
+    @Mapping(target = "params", source = "measuringRanges", qualifiedByName = "convertStringListToAdditionalCharacteristics")
     MeasuringRanges fromEntityToMeasuringRanges(Product product);
 
+    @Mapping(target = "measuringRanges", ignore = true)
     ProductCreationResponse fromEntityToProductCreationResponse(Product product);
 
     @Mapping(target = "count", source = "count")

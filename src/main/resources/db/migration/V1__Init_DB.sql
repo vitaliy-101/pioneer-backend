@@ -17,43 +17,44 @@ create table if not exists tokens
     CONSTRAINT fk_token_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
+create table if not exists manufacturer
+(
+    id      BIGSERIAL,
+    name    VARCHAR,
+    country VARCHAR,
+    image   bytea,
+    CONSTRAINT pk_manufacturer primary key (id)
+);
 
 create table if not exists product
 (
     id                          BIGSERIAL,
     operating_temperature       VARCHAR,
     degree_protection           VARCHAR,
-    battery_life                INT,
-    warning_alarm               BOOLEAN,
-    display                     BOOLEAN,
+    warning_alarm               VARCHAR,
+    display                     VARCHAR,
     calibration                 VARCHAR,
-    response_time               INT,
+    response_time               VARCHAR,
     explosion_protection_rating VARCHAR,
     power_supply                VARCHAR,
-    country                     VARCHAR,
     operating_humidity          VARCHAR,
-    manufacturer                VARCHAR,
     sensor_type                 VARCHAR,
     gas_sampling                VARCHAR,
     enclosure                   VARCHAR,
-    operating_time              INT,
-    charging_time               INT,
+    operating_time              VARCHAR,
+    charging_time               VARCHAR,
     description                 VARCHAR,
     title                       VARCHAR,
     price                       REAL,
-    measured_gases_type         VARCHAR,
     channel_type                VARCHAR,
     type                        VARCHAR,
-    wireless_link               VARCHAR,
-    integrated_pump             VARCHAR,
     additional                  TEXT[],
-    combustible_gases           VARCHAR,
-    oxygen                      VARCHAR,
-    carbon_monoxide             VARCHAR,
-    hydrogen_sulphide           VARCHAR,
+    measuring_ranges            TEXT[],
     created_at                  TIMESTAMP,
     sales                       INT,
-    CONSTRAINT pk_product primary key (id)
+    manufacturer_id             BIGINT,
+    CONSTRAINT pk_product primary key (id),
+    CONSTRAINT fk_manufacturer_id FOREIGN KEY (manufacturer_id) REFERENCES manufacturer (id) ON DELETE SET NULL
 );
 
 
@@ -79,13 +80,6 @@ create table if not exists basket
     CONSTRAINT pk_bucket primary key (id),
     CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES product (id) ON DELETE CASCADE
-);
-
-create table if not exists manufacturer
-(
-    name  VARCHAR,
-    image bytea,
-    CONSTRAINT pk_manufacturer primary key (name)
 );
 
 create table if not exists docs

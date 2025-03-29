@@ -6,6 +6,7 @@ import com.example.pioneerbackend.entity.product.Product;
 import com.example.pioneerbackend.exceptions.NotFoundByIdException;
 import com.example.pioneerbackend.mapper.custom.CustomProductMapper;
 import com.example.pioneerbackend.repository.ProductRepository;
+import com.example.pioneerbackend.service.manufacturer.ManufacturerService;
 import com.example.pioneerbackend.specification.ProductFilterSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,11 @@ public class ProductService {
     private final ProductImageService imageService;
     private final ProductFilterSpecification specification;
     private final CustomProductMapper mapper;
+    private final ManufacturerService manufacturerService;
 
-    public Product createProduct(Product product, List<MultipartFile> images) {
+    public Product createProduct(ProductCreationRequest request, List<MultipartFile> images) {
+        var manufacturer = manufacturerService.findByIdNull(request.getManufacturerId());
+        var product = mapper.fromCreationRequestToEntity(request, manufacturer);
         var savedProduct = repository.save(product);
         if (images != null && !images.isEmpty()) {
             product.setImages(imageService.saveImages(images, savedProduct));
@@ -43,7 +47,8 @@ public class ProductService {
     @Modifying
     public Product update(Long id, ProductCreationRequest request) {
         existsById(id);
-        var product = mapper.fromCreationRequestToEntity(request);
+        var manufacturer = manufacturerService.findByIdNull(request.getManufacturerId());
+        var product = mapper.fromCreationRequestToEntity(request, manufacturer);
         product.setId(id);
         return repository.save(product);
     }

@@ -48,7 +48,8 @@ public class SecurityConfig {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(AbstractHttpConfigurer::disable)
+                //.cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(
                         req -> req.requestMatchers("/login/**", "/register/**", "/refresh_token/**", "/swagger-ui/**",
                                         "/swagger-resources/*", "/v3/api-docs/**", "/api/v1/**", "/**")
@@ -87,9 +88,13 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("*")); // Замените на ваш адрес
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "http://5.35.124.93:4173",
+                "https://pioneergas-manager.ru"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "*"));
-        configuration.setAllowCredentials(false);
+        configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);

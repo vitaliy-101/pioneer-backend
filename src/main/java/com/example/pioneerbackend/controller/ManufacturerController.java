@@ -24,7 +24,14 @@ public class ManufacturerController {
     @PostMapping
     public void create(@RequestPart("request")  ManufacturerCreateRequest request,
                        @RequestPart("image") MultipartFile image) {
-        service.create(request.getName(), image);
+        service.create(request, image);
+    }
+
+    @PutMapping("/{id}")
+    public void update(@RequestPart("request")  ManufacturerCreateRequest request,
+                       @RequestPart("image") MultipartFile image,
+                       @PathVariable("id") Long id) {
+        service.update(request, image, id);
     }
 
     @GetMapping
@@ -33,13 +40,13 @@ public class ManufacturerController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") String id) {
+    public void deleteById(@PathVariable("id") Long id) {
         service.deleteById(id);
     }
 
     @Operation(description = "Получить фото производителя по названию (id)")
     @GetMapping("/{id}")
-    public ResponseEntity<Resource> loadImage(@PathVariable("id") String id) {
+    public ResponseEntity<Resource> loadImage(@PathVariable("id") Long id) {
         var imageData = service.findImageById(id);
         return createLoadResponseEntity(imageData);
     }

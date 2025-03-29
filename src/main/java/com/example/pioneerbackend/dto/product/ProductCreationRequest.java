@@ -19,6 +19,9 @@ public class ProductCreationRequest {
     @Schema(description = "Краткое название товара")
     private String title;
 
+    @Schema(description = "Id производителя")
+    private Long manufacturerId;
+
     @Schema(description = "Характеристики товара")
     private ProductCharacteristics productCharacteristics;
 

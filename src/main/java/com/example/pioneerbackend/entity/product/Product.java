@@ -2,6 +2,7 @@ package com.example.pioneerbackend.entity.product;
 
 import com.example.pioneerbackend.entity.basket.Basket;
 import com.example.pioneerbackend.entity.docs.Docs;
+import com.example.pioneerbackend.entity.manufacturer.Manufacturer;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,20 +29,17 @@ public class Product {
     @Column(name = "degree_protection")
     private String degreeProtection;
 
-    @Column(name = "battery_life")
-    private Integer batteryLife;
-
     @Column(name = "warning_alarm")
-    private Boolean warningAlarm;
+    private String warningAlarm;
 
     @Column(name = "display")
-    private Boolean display;
+    private String display;
 
     @Column(name = "calibration")
     private String calibration;
 
     @Column(name = "response_time")
-    private Integer responseTime;
+    private String responseTime;
 
     @Column(name = "explosion_protection_rating")
     private String explosionProtectionRating;
@@ -49,14 +47,8 @@ public class Product {
     @Column(name = "power_supply")
     private String powerSupply;
 
-    @Column(name = "country")
-    private String country;
-
     @Column(name = "operating_humidity")
     private String operatingHumidity;
-
-    @Column(name = "manufacturer")
-    private String manufacturer;
 
     @Column(name = "sensor_type")
     private String sensorType;
@@ -68,10 +60,10 @@ public class Product {
     private String enclosure;
 
     @Column(name = "operating_time")
-    private Integer operatingTime;
+    private String operatingTime;
 
     @Column(name = "charging_time")
-    private Integer chargingTime;
+    private String chargingTime;
 
     @Column(name = "description")
     private String description;
@@ -82,39 +74,26 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "measured_gases_type")
-    private String measuredGasesType;
-
     @Column(name = "channel_type")
     private String channelType;
 
     @Column(name = "type")
     private String type;
 
-    @Column(name = "wireless_link")
-    private String wirelessLink;
-
-    @Column(name = "integrated_pump")
-    private String integratedPump;
-
     @JdbcTypeCode(SqlTypes.ARRAY)
     @Column(name = "additional", columnDefinition = "TEXT[]")
     private List<String> additional;
 
-    @Column(name = "combustible_gases")
-    private String combustibleGases;
-
-    @Column(name = "oxygen")
-    private String oxygen;
-
-    @Column(name = "carbon_monoxide")
-    private String carbonMonoxide;
-
-    @Column(name = "hydrogen_sulphide")
-    private String hydrogenSulphide;
+    @JdbcTypeCode(SqlTypes.ARRAY)
+    @Column(name = "measuring_ranges", columnDefinition = "TEXT[]")
+    private List<String> measuringRanges;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "manufacturer_id")
+    private Manufacturer manufacturer;
 
     @Column(name = "sales")
     private Integer sales = 0;

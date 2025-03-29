@@ -9,4 +9,7 @@ import lombok.Setter;
 public class ManufacturerCreateRequest {
     @Schema(description = "Название производителя")
     private String name;
+
+    @Schema(description = "Страна производителя")
+    private String country;
 }
