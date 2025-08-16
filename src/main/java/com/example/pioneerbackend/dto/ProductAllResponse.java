@@ -16,4 +16,6 @@ public class ProductAllResponse {
 
     @Schema(description = "Страница продукта")
     private List<ProductShortResponse> products;
+
+    private Integer total;
 }

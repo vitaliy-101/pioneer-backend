@@ -74,7 +74,7 @@ public class ProductController {
         var products = productService.findAll(request, pageable);
         var baskets = basketService.findBasketsByProductIds(extractProductIds(products), silenceIds(user, uuid));
         return productMapper.fromPageProductToResponse(
-                products, mapBasketsToMapProductCounts(baskets));
+                products, mapBasketsToMapProductCounts(baskets), products.getTotalPages());
     }
 
 

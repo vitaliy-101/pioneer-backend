@@ -70,10 +70,10 @@ public class CustomProductMapper {
         return manufacturerMapper.toManufacturerInfo(product.getManufacturer());
     }
 
-    public ProductAllResponse fromPageProductToResponse(Page<Product> products, Map<Long, Integer> productCountsMap) {
+    public ProductAllResponse fromPageProductToResponse(Page<Product> products, Map<Long, Integer> productCountsMap, Integer total) {
         return new ProductAllResponse(products.stream()
                 .map(product -> productMapper.fromEntityToShortResponse(product, extractProductCountFromMap(productCountsMap, product.getId())))
-                .toList());
+                .toList(), total);
     }
 
     private void setMainParamsFromRequest(ProductCreationRequest request, Product product) {
