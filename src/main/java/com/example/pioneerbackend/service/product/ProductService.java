@@ -2,6 +2,7 @@ package com.example.pioneerbackend.service.product;
 
 import com.example.pioneerbackend.dto.filter.ProductFilter;
 import com.example.pioneerbackend.dto.product.ProductCreationRequest;
+import com.example.pioneerbackend.dto.product.ProductSaleInfo;
 import com.example.pioneerbackend.entity.product.Product;
 import com.example.pioneerbackend.exceptions.NotFoundByIdException;
 import com.example.pioneerbackend.mapper.custom.CustomProductMapper;
@@ -53,6 +54,13 @@ public class ProductService {
         return repository.save(product);
     }
 
+    @Transactional
+    @Modifying
+    public void updateSales(List<ProductSaleInfo> productSaleInfos) {
+        productSaleInfos.forEach(productSaleInfo ->
+                repository.updateSale(productSaleInfo.getCount(), productSaleInfo.getId()));
+    }
+
     public Product findProductById(Long id) {
         return repository.findById(id).orElseThrow(() -> new NotFoundByIdException(Product.class, id));
     }
@@ -61,6 +69,12 @@ public class ProductService {
     public Page<Product> findAll(ProductFilter request, Pageable pageable) {
         return repository.findAll(specification.filterByCriteria(request), pageable);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 
 
 }

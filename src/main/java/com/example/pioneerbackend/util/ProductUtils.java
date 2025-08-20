@@ -10,14 +10,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.example.pioneerbackend.constant.Urls.PRODUCT_IMAGE_URL;
-import static com.example.pioneerbackend.util.FileUtils.convertFileToUrl;
+import static com.example.pioneerbackend.util.FileUtils.convertToUrl;
 
 @UtilityClass
 public class ProductUtils {
     public static List<String> extractImages(Product product) {
         return product.getImages().stream()
                 .sorted(Comparator.comparing(ProductImage::isMain).reversed())
-                .map(productImage -> convertFileToUrl(PRODUCT_IMAGE_URL, productImage.getId().toString()))
+                .map(productImage -> convertToUrl(PRODUCT_IMAGE_URL, productImage.getId().toString()))
                 .collect(Collectors.toList());
     }
 

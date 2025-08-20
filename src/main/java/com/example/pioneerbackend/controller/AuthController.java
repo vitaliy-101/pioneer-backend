@@ -5,6 +5,7 @@ import com.example.pioneerbackend.dto.auth.AuthResponse;
 import com.example.pioneerbackend.dto.auth.AuthorisationRequest;
 import com.example.pioneerbackend.mapper.AuthMapper;
 import com.example.pioneerbackend.service.auth.AuthenticationService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

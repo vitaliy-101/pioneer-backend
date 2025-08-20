@@ -2,6 +2,7 @@ package com.example.pioneerbackend.service.basket;
 
 import com.example.pioneerbackend.dto.basket.BasketCreateRequest;
 import com.example.pioneerbackend.dto.basket.BasketGetResponse;
+import com.example.pioneerbackend.dto.product.ProductSaleInfo;
 import com.example.pioneerbackend.entity.basket.Basket;
 import com.example.pioneerbackend.entity.user.User;
 import com.example.pioneerbackend.mapper.BasketMapper;
@@ -39,6 +40,15 @@ public class BasketService {
     @Transactional
     public void deleteById(Long productId, UserUuid userUuid) {
         repository.deleteById(userUuid.getUserId(), userUuid.getUuid(), productId);
+    }
+
+    @Transactional
+    public void delete(List<Long> productIds, UserUuid userUuid) {
+        repository.delete(userUuid.getUserId(), userUuid.getUuid(), productIds);
+    }
+
+    public List<ProductSaleInfo> findProductForSale(UserUuid userUuid) {
+        return repository.findProductForSale(userUuid.getUserId(), userUuid.getUuid());
     }
 
     public BasketGetResponse findAll(UserUuid userUuid) {

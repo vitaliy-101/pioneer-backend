@@ -45,7 +45,7 @@ public class ManufacturerController {
     }
 
     @Operation(description = "Получить фото производителя по названию (id)")
-    @GetMapping("/{id}")
+    @GetMapping("image/{id}")
     public ResponseEntity<Resource> loadImage(@PathVariable("id") Long id) {
         var imageData = service.findImageById(id);
         return createLoadResponseEntity(imageData);

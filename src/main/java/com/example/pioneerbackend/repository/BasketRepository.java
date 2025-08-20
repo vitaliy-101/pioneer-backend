@@ -1,6 +1,7 @@
 package com.example.pioneerbackend.repository;
 
 import com.example.pioneerbackend.dto.basket.BasketElementInfo;
+import com.example.pioneerbackend.dto.product.ProductSaleInfo;
 import com.example.pioneerbackend.entity.basket.Basket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -34,6 +35,17 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
                     @Param("uuid") String uuid,
                     @Param("productId") Long productId);
 
+    @Modifying
+    @Query("""
+                DELETE FROM Basket b
+                WHERE ((:userId IS NOT NULL AND b.user.id = :userId)
+                   OR (:userId IS NULL AND b.uuid = :uuid))
+                  AND b.product.id IN :productIds
+            """)
+    void delete(@Param("userId") Long userId,
+                @Param("uuid") String uuid,
+                @Param("productIds") List<Long> productIds);
+
 
     @Query("""
                 SELECT new com.example.pioneerbackend.dto.basket.BasketElementInfo(
@@ -53,15 +65,27 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
             """)
     List<BasketElementInfo> findBasketElements(@Param("userId") Long userId, @Param("uuid") String uuid);
 
+    @Query("""
+                SELECT new com.example.pioneerbackend.dto.product.ProductSaleInfo(
+                    p.id,
+                    b.count
+                )
+                FROM Basket b
+                JOIN Product p ON b.product.id = p.id
+                WHERE (:userId IS NOT NULL AND b.user.id = :userId)
+                   OR (:userId IS NULL AND b.uuid = :uuid)
+                ORDER BY b.id
+            """)
+    List<ProductSaleInfo> findProductForSale(@Param("userId") Long userId, @Param("uuid") String uuid);
 
     @Query("""
-            SELECT b
-            FROM Basket b
-            WHERE ((:userId IS NOT NULL AND b.user.id = :userId)
-               OR (:userId IS NULL AND b.uuid = :uuid))
-               AND b.product.id IN :productIds
-            ORDER BY b.id
-        """)
+                SELECT b
+                FROM Basket b
+                WHERE ((:userId IS NOT NULL AND b.user.id = :userId)
+                   OR (:userId IS NULL AND b.uuid = :uuid))
+                   AND b.product.id IN :productIds
+                ORDER BY b.id
+            """)
     List<Basket> findBasketsByProducts(
             @Param("userId") Long userId,
             @Param("uuid") String uuid,
@@ -69,13 +93,13 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     );
 
     @Query("""
-            SELECT b
-            FROM Basket b
-            WHERE ((:userId IS NOT NULL AND b.user.id = :userId)
-               OR (:userId IS NULL AND b.uuid = :uuid))
-               AND b.product.id = :productId
-            ORDER BY b.id
-        """)
+                SELECT b
+                FROM Basket b
+                WHERE ((:userId IS NOT NULL AND b.user.id = :userId)
+                   OR (:userId IS NULL AND b.uuid = :uuid))
+                   AND b.product.id = :productId
+                ORDER BY b.id
+            """)
     Basket findBasketsByProductId(
             @Param("userId") Long userId,
             @Param("uuid") String uuid,

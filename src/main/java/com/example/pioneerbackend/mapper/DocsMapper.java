@@ -4,7 +4,7 @@ import com.example.pioneerbackend.dto.docs.*;
 import com.example.pioneerbackend.entity.docs.Docs;
 import com.example.pioneerbackend.entity.product.Product;
 
-import static com.example.pioneerbackend.util.FileUtils.convertFileToUrl;
+import static com.example.pioneerbackend.util.FileUtils.convertToUrl;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -37,6 +37,6 @@ public interface DocsMapper {
 
     @Named("convertImageToUrl")
     default String convertImageToUrl(Long docId) {
-        return convertFileToUrl(DOCS_FILE_URL, docId.toString());
+        return convertToUrl(DOCS_FILE_URL, docId.toString());
     }
 }
