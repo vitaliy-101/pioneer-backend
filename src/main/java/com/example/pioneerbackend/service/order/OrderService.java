@@ -1,12 +1,10 @@
 package com.example.pioneerbackend.service.order;
 
-import com.example.pioneerbackend.constant.NotificationMessage;
 import com.example.pioneerbackend.dto.order.OrderRequest;
 import com.example.pioneerbackend.dto.product.ProductSaleInfo;
 import com.example.pioneerbackend.service.basket.BasketService;
 import com.example.pioneerbackend.service.notification.NotificationService;
 import com.example.pioneerbackend.service.product.ProductService;
-import com.example.pioneerbackend.util.NotificationUtils;
 import com.example.pioneerbackend.util.UserUuid;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.pioneerbackend.constant.NotificationMessage.*;
+import static com.example.pioneerbackend.constant.OrderMessage.*;
 import static com.example.pioneerbackend.util.NotificationUtils.addProductDataToMessage;
 
 @Service

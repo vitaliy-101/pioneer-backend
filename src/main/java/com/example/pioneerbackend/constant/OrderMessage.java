@@ -3,7 +3,7 @@ package com.example.pioneerbackend.constant;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class NotificationMessage {
+public class OrderMessage {
     public static final String USER_MESSAGE_THEME = "PIONEER-GAS: Оформление заказа";
     public static final String ADMIN_MESSAGE_THEME = "Новый заказ";
 
