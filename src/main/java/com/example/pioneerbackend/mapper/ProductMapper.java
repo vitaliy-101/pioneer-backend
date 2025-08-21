@@ -43,6 +43,10 @@ public interface ProductMapper {
         if (product.getImages() == null) {
             return "";
         }
+        var images = ProductUtils.extractImages(product);
+        if (images == null || images.isEmpty()) {
+            return "";
+        }
         return ProductUtils.extractImages(product).getFirst();
     }
 

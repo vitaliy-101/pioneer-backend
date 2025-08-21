@@ -27,7 +27,6 @@ public class FilterMultiBehaviour implements FilterBehaviour {
 
                 Join<Product, Manufacturer> manufacturerJoin = filterUnit.getRoot()
                         .join(associationName, JoinType.LEFT);
-
                 filterUnit.getPredicates().add(
                         manufacturerJoin.get(fieldName).in(values)
                 );

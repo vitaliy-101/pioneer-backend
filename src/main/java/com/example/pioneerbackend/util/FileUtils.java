@@ -1,7 +1,6 @@
 package com.example.pioneerbackend.util;
 
 import com.example.pioneerbackend.dto.docs.DocImageInfo;
-import com.example.pioneerbackend.dto.docs.DocInfo;
 import com.example.pioneerbackend.dto.image.ImageData;
 import com.example.pioneerbackend.exceptions.MultipartFileBytesIsNullException;
 import lombok.experimental.UtilityClass;
@@ -14,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.core.io.Resource;
 import java.io.ByteArrayInputStream;
-import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,11 +58,8 @@ public class FileUtils {
     }
 
 
-    public static String convertFileToUrl(String url, String id) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path(url)
-                .path(id)
-                .toUriString();
+    public static String convertToUrl(String url, String id) {
+        return url + id;
     }
 
     public static ImageData createImageData(byte[] data) {

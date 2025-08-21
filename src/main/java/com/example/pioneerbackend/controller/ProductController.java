@@ -46,7 +46,13 @@ public class ProductController {
         );
     }
 
-    @Operation(description = "Создать новый товар")
+    @Operation(description = "Удалить товар")
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        productService.delete(id);
+    }
+
+    @Operation(description = "Обновить товар")
     @PutMapping("/{id}")
     public ProductCreationResponse update(@RequestBody ProductCreationRequest request,
                                           @PathVariable("id") Long id) {

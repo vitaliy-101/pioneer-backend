@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 import java.util.List;
 
 import static com.example.pioneerbackend.constant.Urls.MANUFACTURER_IMAGE_URL;
-import static com.example.pioneerbackend.util.FileUtils.convertFileToUrl;
+import static com.example.pioneerbackend.util.FileUtils.convertToUrl;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ManufacturerMapper {
@@ -25,6 +25,6 @@ public interface ManufacturerMapper {
 
     @Named("convertImageToUrl")
     default String convertImageToUrl(Long id) {
-        return convertFileToUrl(MANUFACTURER_IMAGE_URL, id.toString());
+        return convertToUrl(MANUFACTURER_IMAGE_URL, id.toString());
     }
 }

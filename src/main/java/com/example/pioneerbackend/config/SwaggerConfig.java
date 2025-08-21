@@ -14,8 +14,8 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openApi() {
         Server server = new Server();
-        //server.setUrl("https://pioneergas-manager.ru");
-        server.setUrl("http://localhost:8000");
+        server.setUrl("https://pioneer-gas-manager.ru");
+        //server.setUrl("http://localhost:8000");
         server.setDescription("Server");
         final String securitySchemeName = "bearerAuth";
         return new OpenAPI().info(new Info().title("pioneer-web").description("API documentation").version("1"))
